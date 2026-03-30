@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: sales-backend
+    ports:
+      - '4000:4000'
+    volumes:
+      - sales-db:/app/data
+    environment:
+      - PORT=4000
+      - DB_PATH=/app/data/sales.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        - NEXT_PUBLIC_API_URL=http://localhost:4000
+    container_name: sales-frontend
+    ports:
+      - '3000:3000'
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  sales-db:
