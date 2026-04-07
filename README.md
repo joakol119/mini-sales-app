@@ -65,3 +65,6 @@ CREATE TABLE sales (
   created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 )
 ```
+## Vista previa
+
+![screenshot](./screenshot.png)
